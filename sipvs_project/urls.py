@@ -16,8 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from formular_web.views import *
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home_view)
-]
+    path('', home_view),
+    path('person/', person_view, name="person")
+
+] + staticfiles_urlpatterns()

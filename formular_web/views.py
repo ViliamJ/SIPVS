@@ -11,3 +11,6 @@ def home_view(request):
     marha = request.GET
     print(marha)
     return render(request, "home.html")
+
+def person_view(request):
+    return render(request, "person_form_template.html")

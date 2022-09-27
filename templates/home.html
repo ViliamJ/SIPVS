@@ -1,18 +1,17 @@
 <!DOCTYPE html>
+ {% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-
+  <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
 </head>
 <body>
-    <include src="person_form_template.html"></include>
-    <form action = "" method = "GET">
-        <label for="your_name">Your name: </label>
-        <input id="your_name" type="text" name="your_name">
-        <input type="submit" value="OK">
-    </form>
+<div class="center">
+<h1 class="center"> Cars registering page </h1>
 
-
+<h2> Identify yourself </h2>
+{% include "person_form_template.html" %}
+</div>
 </body>
 </html>
