@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Car</title>
+</head>
+<body>
+{% block content %}
+    <form action="/car/"  method="post">
+        {% csrf_token %}
+        <label for="spz">SPZ: </label>
+        <input id="spz" type="text" name="spz" maxlength="7" required>
+
+
+        {{ form }}
+        <input type="submit" name="generateXml" value="Generate XML">
+        <input type="submit" name="validateXml" value="Validate XML">
+        <input type="submit" name="showData" value="show data">
+    </form>
+{% endblock %}
+
+<!--<form action = "" method = "GET">
+        <label class="left" for="car_types">Choose a type of car:</label><br>
+        <select id="car_types" name="car_types">
+          <option value="personal">Personal vehicle</option>
+          <option value="truck">Truck</option>
+          <option value="pickup">Pickup</option>
+          <option value="microbus">Microbus</option>
+            <option value="bus">Bus</option>
+        </select><br>
+
+        <label class="left" for="spz1">SPZ</label><br>
+        <input type="text" id="spz1" name="spz1"><br>
+
+        <label class="left" for="car_brand">Car brand:</label><br>
+        <input type="text" id="car_brand" name="car_brand"><br>
+
+         <label class="left" for="year_of_manufacturing">Year of manufacturing:</label><br>
+        <input type="number" value="42" id="year_of_manufacturing" name="year_of_manufacturing"><br>
+
+        <label for="registration_day">Date of registration:</label><br>
+        <input type="date" id="registration_day" name="registration_day"><br><br>
+    </form>-->
+</body>
+</html>

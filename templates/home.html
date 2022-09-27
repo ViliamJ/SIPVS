@@ -1,17 +1,18 @@
 <!DOCTYPE html>
- {% load static %}
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-  <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'admin/css/style.css' %}">
 </head>
 <body>
 <div class="center">
-<h1 class="center"> Cars registering page </h1>
+<h1> Cars registering page </h1>
 
-<h2> Identify yourself </h2>
-{% include "person_form_template.html" %}
+<h2> Identify car </h2>
+{% include "car_form_template.html" %}
+
 </div>
 </body>
 </html>
