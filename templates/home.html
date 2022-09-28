@@ -13,6 +13,37 @@
 <h2> Identify car </h2>
 {% include "car_form_template.html" %}
 
+
+{% load static %}
+
+<script src="{% static 'admin/js/jquery.min.js' %}"></script>
+<script src="{% static 'admin/js/jquery.formset.js' %}"></script>
+<div>
+    <form method="post" action="{% url 'submit' %}">
+        {% csrf_token %}
+          <fieldset>
+          <legend>Contact Details</legend>
+
+          <div>
+            {{ contact_form.management_form }}
+            {% for contact in contact_form %}
+             <div class="link-formset">
+              {{ contact.as_p }}
+            </div>
+            {% endfor %}
+
+          </div>
+
+
+        </fieldset>
+
+     <script>
+    $('.link-formset').formset({
+        addText: 'Add Contact',
+        deleteText: 'Remove Contact'
+    });
+</script>
+
 </div>
 </body>
 </html>

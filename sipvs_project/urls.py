@@ -19,9 +19,10 @@ from formular_web.views import *
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', home_view),
-    path('person/', person_view, name="person"),
-    path('car/', get_car, name="car")
+                  path('admin/', admin.site.urls),
+                  path('', home_view),
+                  path('person/', person_view, name="person"),
+                  path('car/', get_car, name="car"),
+                  path('contact/', ContactFormView.as_view(), name='submit'),
 
-] + staticfiles_urlpatterns()
+              ] + staticfiles_urlpatterns()
