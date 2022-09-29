@@ -3,47 +3,79 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-  <link rel="stylesheet" type="text/css" href="{% static 'admin/css/style.css' %}">
+    <title>Cars registering</title>
+    <script src="{% static 'admin/js/jquery.min.js' %}"></script>
+    <script src="{% static 'admin/js/jquery.formset.js' %}"></script>
+    <style>
+        body {
+            background-color: linen;
+            font-family: "Bitstream Vera Sans Mono", Monaco, "Courier New", Courier, monospace;
+        }
+
+        h1 {
+            color: grey;
+            font-family: "Bitstream Vera Sans Mono", Monaco, "Courier New", Courier, monospace;
+        }
+        .center {
+            text-align: center;
+            border: 3px solid black;
+        }
+       .add-row {
+           color: #006b1b;
+           font-weight: bold;
+           font-style: normal;
+       }
+       .delete-row {
+           color: #a41515;
+           font-weight: bold;
+           font-style: normal;
+       }
+       input {
+           width: 300px;
+       }
+       label {
+           padding: 12px 12px 12px 0;
+           display: inline-block;
+       }
+    </style>
+
 </head>
 <body>
-<div class="center">
-<h1> Cars registering page </h1>
-
-<h2> Identify car </h2>
-{% include "car_form_template.html" %}
-
-
-{% load static %}
-
-<script src="{% static 'admin/js/jquery.min.js' %}"></script>
-<script src="{% static 'admin/js/jquery.formset.js' %}"></script>
-<div>
-    <form method="post" action="{% url 'submit' %}">
-        {% csrf_token %}
-          <fieldset>
-          <legend>Contact Details</legend>
-
-          <div>
-            {{ contact_form.management_form }}
-            {% for contact in contact_form %}
-             <div class="link-formset">
-              {{ contact.as_p }}
-            </div>
-            {% endfor %}
-
-          </div>
-
-
-        </fieldset>
-
-     <script>
-    $('.link-formset').formset({
-        addText: 'Add Contact',
-        deleteText: 'Remove Contact'
-    });
-</script>
-
-</div>
+    <div class="center">
+        <h1> Cars Race registering page </h1>
+        <div>
+            <form method="post" action="">
+                {% csrf_token %}
+                <fieldset>
+                    <div>
+                        {{ car_form.management_form }}
+                        {% for car in car_form %}
+                        <h2> Identify yourself </h2>
+                        <h2 style="color: #a41515; font-weight: bold"> {{ error_message }}</h2>
+                        <label>First name </label>  {{ car.first_name }} <br>
+                        <label>Second name </label> {{ car.second_name }} <br>
+                        <label>Email </label>{{ car.email }} <br>
+                        <label>ID number </label>{{ car.ID_number }} <br>
+                        <div class="link-formset">
+                            <h2>Car Details</h2>
+                            <label>Car brand </label> {{ car.car_brand }} <br>
+                             <label>Car type </label> {{ car.car_type }} <br>
+                             <label>SPZ </label> {{ car.spz }} <br>
+                             <label>Registration date </label> {{ car.registration_date }} <br>
+                             <label>Car VIN </label> {{ car.vin }} <br>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </fieldset>
+                <input type="submit" value="Send Request" />
+            </form>
+        </div>
+        <script>
+        $('.link-formset').formset({
+            addText: 'Add Car',
+            deleteText: 'Remove Car'
+        });
+        </script>
+    </div>
 </body>
 </html>
