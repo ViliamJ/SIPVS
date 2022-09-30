@@ -17,7 +17,7 @@ class MyCar(models.Model):
     car_type = models.CharField(max_length=30, choices=CAR_GROUP, blank=False, null=True)
     spz = models.CharField(max_length=7, blank=True, null=True)
     registration_date = models.DateField(default=datetime.date.today())
-    vin = models.FloatField(max_length=10, blank=True, null=True)
+    vin = models.IntegerField(max_length=10, blank=True, null=True)
 
     def __str__(self):
         return self.name

@@ -8,6 +8,8 @@ from django.utils.datetime_safe import strftime
 from .forms import CarForm
 from django.views import View
 
+from .xml_generator import generateXML
+
 
 def home_view(request):
     # print(request.GET)
@@ -28,6 +30,9 @@ class CarFormView(View):
         }
 
         return render(request, self.template_name, context)
+
+    #DATA work is now in xml_generator
+
 
     #car_formset is set of all submitted cars and one identified user
     #it means that every itteration in car_formset marked as car, represents data for every submitted car
@@ -59,19 +64,7 @@ class CarFormView(View):
     def post(self, request, *args, **kwargs):
         car_formset = self.Car_FormSet(self.request.POST)
         if car_formset.is_valid():
-            for car in car_formset:
-                cd = car.cleaned_data
-                print(cd.get('first_name'))
-                print(cd.get('second_name'))
-                print(cd.get('email'))
-                print(cd.get('ID_number'))
-                print(cd.get('car_brand'))
-                print(cd.get('car_type'))
-                print(cd.get('spz'))
-                print(cd.get('registration_date').strftime("%d-%b-%y"))
-                print(cd.get('vin'))
-                print('===================================')
-
+            generateXML(car_formset)
             context = {
                 'car_form': self.Car_FormSet(),
                 'error_message': ""
