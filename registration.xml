@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<registration>
+	<user>
+		<first_name>simon</first_name>
+		<second_name>drienik</second_name>
+		<email>sdrienik@gmail.com</email>
+		<ID_number>EJ345523</ID_number>
+	</user>
+	<car_list>
+		<car>
+			<car_brand>toyota</car_brand>
+			<car_type>TRUCK</car_type>
+			<spz>PU443BG</spz>
+			<registration_date>2022-09-30</registration_date>
+			<vin>6543</vin>
+		</car>
+		<car>
+			<car_brand>ford</car_brand>
+			<car_type>BUS</car_type>
+			<spz>PU275ay</spz>
+			<registration_date>2022-06-21</registration_date>
+			<vin>567</vin>
+		</car>
+	</car_list>
+</registration>
