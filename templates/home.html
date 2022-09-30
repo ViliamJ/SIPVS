@@ -52,6 +52,7 @@
                         {% for car in car_form %}
                         <h2> Identify yourself </h2>
                         <h2 style="color: #a41515; font-weight: bold"> {{ error_message }}</h2>
+                        <h2 style="color: #232828; font-weight: bold"> {{ validate_message }}</h2>
                         <label>First name </label>  {{ car.first_name }} <br>
                         <label>Second name </label> {{ car.second_name }} <br>
                         <label>Email </label>{{ car.email }} <br>
@@ -68,6 +69,7 @@
                     </div>
                 </fieldset>
                 <input type="submit" value="Generate XML" name="generate_XML" />
+                <input type="submit" value="Generate and validate XML" name="generate_validate_XML" />
             </form>
         </div>
         <script>
