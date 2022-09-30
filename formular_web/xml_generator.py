@@ -3,7 +3,7 @@ from django.forms import formset_factory
 from formular_web.forms import CarForm
 
 
-def generateXML(car_formset: formset_factory(CarForm)):
+def generateXML(car_formset: formset_factory(CarForm), file_name):
     root = minidom.Document()
 
     registration = root.createElement('registration')
@@ -64,7 +64,11 @@ def generateXML(car_formset: formset_factory(CarForm)):
         vin.appendChild(root.createTextNode(str(cd.get('vin'))))
 
     xml_str = root.toprettyxml(indent="\t")
-    save_path_file = "registration.xml"
+    if ".xml" in file_name:
+        save_path_file = file_name#"registration.xml"
+    else:
+        save_path_file = file_name + ".xml"  # "registration.xml"
+
 
     with open(save_path_file, "w") as f:
         f.write(xml_str)

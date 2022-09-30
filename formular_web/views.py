@@ -9,6 +9,7 @@ from django.views import View
 
 from .xml_generator import generateXML
 from .xml_validator import validateXML
+from django.http import HttpResponse
 
 
 def home_view(request):
@@ -62,18 +63,35 @@ class CarFormView(View):
 
     def post(self, request, *args, **kwargs):
         car_formset = self.Car_FormSet(self.request.POST)
+        file_name = request.POST['file_name']
         validate_message = ""
-        if 'generate_validate_XML' in request.POST:
-            validate_message = validateXML()
-        if car_formset.is_valid():
-            generateXML(car_formset)
-            context = {
-                'car_form': self.Car_FormSet(),
-                'error_message': "",
-                'validate_message': validate_message
-            }
 
-            return render(request, self.template_name, context)
+        if 'generate_validate_XML' in request.POST:
+
+            try:
+                validate_message = validateXML(file_name=file_name)
+            except:
+                return HttpResponse("Something went wrong, probably file you specified does not exist")
+            if validate_message:
+                return HttpResponse("Validated xml file is okey")
+            else:
+                return HttpResponse("Xml file is NOT okey.")
+
+        if 'generate_HTML' in request.POST:
+            return HttpResponse("Generating HTML zatial nefunguje")
+
+        if car_formset.is_valid():
+
+            if 'generate_XML' in request.POST:
+
+                generateXML(car_formset, file_name=file_name)
+                context = {
+                    'car_form': self.Car_FormSet(),
+                    'error_message': "",
+                    'validate_message': validate_message
+                }
+
+                return render(request, self.template_name, context)
         else:
             context = {
                 'car_form': self.Car_FormSet(),
