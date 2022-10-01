@@ -7,6 +7,7 @@ from django.utils.datetime_safe import strftime
 from .forms import CarForm
 from django.views import View
 
+from .html_generator import generateHTML
 from .xml_generator import generateXML
 from .xml_validator import validateXML
 from django.http import HttpResponse
@@ -64,6 +65,7 @@ class CarFormView(View):
     def post(self, request, *args, **kwargs):
         car_formset = self.Car_FormSet(self.request.POST)
         file_name = request.POST['file_name']
+        xslt_name = request.POST['xslt_name']
         validate_message = ""
 
         if 'generate_validate_XML' in request.POST:
@@ -75,10 +77,11 @@ class CarFormView(View):
             if validate_message:
                 return HttpResponse("Validated xml file is okey")
             else:
-                return HttpResponse("Xml file is NOT okey.")
+                return HttpResponse("Xml file is NOT okey." + validate_message)
 
         if 'generate_HTML' in request.POST:
-            return HttpResponse("Generating HTML zatial nefunguje")
+            generateHTML(file_name, xslt_name)
+            return render(request, 'generated_HTML.html')
 
         if car_formset.is_valid():
 
