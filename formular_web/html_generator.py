@@ -8,5 +8,12 @@ def generateHTML(xml, xslt):
     source_doc = etree.parse(xml)
     output_doc = xslt_transformer(source_doc)
 
-    output_doc.write("templates/generated_HTML.html", pretty_print=True)
+    xml_file = "default.html"
+    if ".xml" in xml:
+        xml_file = xml.split(".")[0]
+
+    new_file_name = xml_file + ".html"
+    output_doc.write(f"templates/{new_file_name}", pretty_print=True)
+
+    return new_file_name
 

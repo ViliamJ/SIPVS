@@ -80,8 +80,8 @@ class CarFormView(View):
                 return HttpResponse("Xml file is NOT okey." + validate_message)
 
         if 'generate_HTML' in request.POST:
-            generateHTML(file_name, xslt_name)
-            return render(request, 'generated_HTML.html')
+            generated_html = generateHTML(file_name, xslt_name)
+            return render(request, generated_html)
 
         if car_formset.is_valid():
 
