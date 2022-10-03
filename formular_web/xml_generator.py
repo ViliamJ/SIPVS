@@ -10,9 +10,7 @@ def generateXML(car_formset: formset_factory(CarForm), file_name):
     root.appendChild(registration)
 
     # USER
-    #user = root.createElement('user')
-    user= root.createElementNS('http://hello.world/ns', 'ex:user')
-    user.setAttribute("xmlns:ex", "http://hello.world/ns")
+    user = root.createElement('user')
     registration.appendChild(user)
 
     first_name = root.createElement('first_name')
