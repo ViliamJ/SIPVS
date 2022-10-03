@@ -77,7 +77,7 @@ class CarFormView(View):
             if validate_message:
                 return HttpResponse("Validated xml file is okey")
             else:
-                return HttpResponse("Xml file is NOT okey." + validate_message)
+                return HttpResponse("Xml file is NOT okey." + str(validate_message))
 
         if 'generate_HTML' in request.POST:
             generated_html = generateHTML(file_name, xslt_name)
