@@ -12,6 +12,7 @@ def generateXML(car_formset: formset_factory(CarForm), file_name):
     # USER
     user = root.createElement('user')
     registration.appendChild(user)
+    user.setAttribute('lol','5')
 
     first_name = root.createElement('first_name')
     user.appendChild(first_name)

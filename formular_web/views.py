@@ -11,7 +11,7 @@ from .html_generator import generateHTML
 from .xml_generator import generateXML
 from .xml_validator import validateXML
 from django.http import HttpResponse
-
+from lxml import etree
 
 def home_view(request):
     # print(request.GET)
@@ -67,17 +67,22 @@ class CarFormView(View):
         file_name = request.POST['file_name']
         xslt_name = request.POST['xslt_name']
         validate_message = ""
+        my_error = ""
 
         if 'generate_validate_XML' in request.POST:
 
             try:
                 validate_message = validateXML(file_name=file_name)
             except:
-                return HttpResponse("Something went wrong, probably file you specified does not exist")
+                return HttpResponse(f"Something went wrong, probably file you specified does not exist. Possible Error: {my_error}")
             if validate_message:
                 return HttpResponse("Validated xml file is okey")
             else:
-                return HttpResponse("Xml file is NOT okey." + str(validate_message))
+                xmlschema_doc = etree.parse('registration.xsd')
+                xmlschema = etree.XMLSchema(xmlschema_doc)
+                xml_doc = etree.parse(file_name + ".xml")
+                omg_error = xmlschema.assertValid(xml_doc)
+                return HttpResponse("Xml file is NOT okey." + str(omg_error))
 
         if 'generate_HTML' in request.POST:
             generated_html = generateHTML(file_name, xslt_name)
@@ -86,7 +91,6 @@ class CarFormView(View):
         if car_formset.is_valid():
 
             if 'generate_XML' in request.POST:
-
                 generateXML(car_formset, file_name=file_name)
                 context = {
                     'car_form': self.Car_FormSet(),
